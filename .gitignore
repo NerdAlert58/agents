@@ -1,0 +1,19 @@
+# macOS metadata
+.DS_Store
+**/.DS_Store
+
+# Stray archives — extract the contents and commit those instead
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
+# Editor / IDE noise
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS noise
+Thumbs.db
+desktop.ini
