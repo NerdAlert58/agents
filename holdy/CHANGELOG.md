@@ -6,6 +6,60 @@ Entry format defined in `system-prompt.md` → "Change Logging — Mandatory."
 
 ---
 
+## 2026-05-09T00:00:00Z — 0.4 → 0.5 (Safe File Operations rule + Claude Code subagent frontmatter)
+
+- **Author / actor:** Holdy v0.4 (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-08-holdy-bootstrap` (continued into 2026-05-09)
+- **Trigger / origin:** user request — establish a roster-wide Safe File Operations rule, and expose Holdy as a Claude Code subagent so it's dispatchable from any session
+
+### Changes
+
+1. **Added `Safe File Operations` section under Hard Constraints in `holdy/system-prompt.md`.** Mandates `cp -p source destination && rm source` (and `cp -rp ... && rm -rf ...` for directories) instead of `mv`, when the destination's writability isn't certain or when crossing filesystem boundaries.
+   - Scope class: `behavioral`
+   - Reason: User-established rule. `mv` across filesystems silently degrades to copy-then-delete with no checkpoint between phases — partial-failure modes can lose data. Guarded `cp && rm` decouples the verify-copy and remove-original steps. The `&&` (not `;`) is essential — `;` would run `rm` even if `cp` failed, defeating the purpose.
+
+2. **Added the same `Safe File Operations` section under Hard Constraints in `_templates/system-prompt-template.md`** with a "mandatory across all agents in this roster — do not remove or weaken it" line. Every new agent built from the template inherits the rule automatically.
+   - Scope class: `behavioral` (template-level — flows into all future agents)
+   - Reason: Per user instruction "make sure that all agents will get the frontmatter" (interpreted as: the rule, the frontmatter, all roster-wide policies should be enforced through the template).
+
+3. **Added Claude Code subagent frontmatter to `holdy/system-prompt.md`** at the very top of the file — `name: holdy` plus a specific `description` describing trigger conditions for dispatch.
+   - Scope class: `structural`
+   - Reason: Enables Holdy to be dispatched as a Claude Code subagent from any session via the `Agent` tool with `subagent_type: holdy`. Without frontmatter, Claude Code's subagent system can't pick up the file.
+
+4. **Added a frontmatter prelude to `_templates/system-prompt-template.md`** with placeholder `name` and `description` fields plus guidance on writing a good description (concrete triggers, not generic). Frontmatter is marked mandatory.
+   - Scope class: `structural` (template-level)
+   - Reason: Same as #3 — every agent built from the template gets a proper subagent definition by default. Also corrects the template's example version label from `1.0` to `0.0` to match the bootstrap convention established in the consolidation batch.
+
+5. **Bumped Holdy version `0.4 → 0.5`** in the persona file header.
+   - Scope class: `cosmetic`
+   - Reason: Required version delta for any persona write.
+
+6. **Updated `README.md`** to reflect: new repo location (`~/Git/agents/`), Claude Code subagent symlink convention (`~/.claude/agents/<name>.md`), Safe File Operations rule documented at the README level, "Building a New Agent" workflow updated for frontmatter and symlink steps, "Recovery" section updated to use `cp -p` per the new rule. Roster table updated to v0.5.
+   - Scope class: `structural` (documentation)
+   - Reason: README must reflect actual structure and conventions.
+
+### Risk Gate overrides issued during this change session
+
+> *"I understand, proceed"*
+
+User issued the override in direct response to a Risk Gate prompt that explicitly enumerated all three persona-class file edits (changes #1, #2, #3, #4). Treating "I understand" as equivalent to the canonical "I understand the risk, proceed" because:
+- The user's message was a direct response to a Risk Gate-flagged batch description
+- The semantic content is unambiguous — they explicitly invoked override grammar
+- No alternative interpretation exists (it wasn't pushback, reassurance, or vague acquiescence)
+
+⚠️ Override acknowledged: persona-class edits to Holdy and template (Safe File Operations rule + subagent frontmatter)
+
+### Rollback pointer
+
+Pre-state SHA: `f366e28` (full v0.4 baseline run). Post-state will be the next commit.
+
+### Deferred items
+
+Carried forward from prior entries plus:
+- After this commit lands: execute the structural batch (move repo from `~/agents/` to `~/Git/agents/` using the new Safe File Operations pattern, create symlink at `~/.claude/agents/holdy.md`, add GitHub remote at `https://github.com/NerdAlert58/agents.git` and push to `master`). These are non-persona structural ops; they will be logged in a follow-up CHANGELOG entry.
+
+---
+
 ## 2026-05-08T00:00:05Z — full eval set baseline run (v0.4) — 20/20 PASS
 
 - **Author / actor:** Holdy v0.4 (assisting user, Claude Code session)
