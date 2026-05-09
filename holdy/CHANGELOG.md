@@ -6,6 +6,51 @@ Entry format defined in `system-prompt.md` → "Change Logging — Mandatory."
 
 ---
 
+## 2026-05-09T00:00:01Z — structural batch: monorepo relocation, subagent symlink, GitHub remote (no persona version change)
+
+- **Author / actor:** Holdy v0.5 (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-08-holdy-bootstrap`
+- **Trigger / origin:** user request — execute the previously-deferred structural batch immediately following the v0.5 commit
+- **Persona version unchanged:** v0.5
+
+### Changes
+
+1. **Relocated repository from `/Users/nerd/agents/` to `/Users/nerd/Git/agents/`.** First real-world dogfood of the new Safe File Operations rule:
+   ```bash
+   cp -rp /Users/nerd/agents /Users/nerd/Git/agents && rm -rf /Users/nerd/agents
+   ```
+   Verified pre-move (488K, 87 files) and post-move (488K, 87 files, git status clean, all 5 commits intact). The `&&` ensured the source was only removed after the copy completed successfully — exactly the failure-mode protection the rule exists for.
+   - Scope class: `structural`
+   - Reason: Align with user's `~/Git/` convention for personal projects; consolidates discoverability for backups, project-finders, and shell habits.
+
+2. **Created Claude Code subagent symlink** at `~/.claude/agents/holdy.md` pointing to `/Users/nerd/Git/agents/holdy/system-prompt.md`. Holdy is now dispatchable from any Claude Code session via `subagent_type: holdy`.
+   - Scope class: `structural`
+   - Reason: Implements Mechanism 3 from the multi-mechanism agent-loading design. Single source of truth — edits to the canonical persona file flow through the symlink automatically.
+
+3. **Added GitHub remote** at `https://github.com/NerdAlert58/agents.git` (auto-rewritten by global git config to `git@github.com:NerdAlert58/agents.git` SSH form) and pushed `master` (with all 5 prior commits) to GitHub. Branch `master` set up to track `origin/master`.
+   - Scope class: `structural`
+   - Reason: Off-machine backup; enables collaboration and remote access. Per user instruction, primary branch stayed as `master` (not renamed to `main`).
+
+### Risk Gate overrides issued during this change session
+
+None required. None of these changes modify persona/skill/agent definition file *content* — they relocate, link, or push existing files. The Safe File Operations rule was applied to the relocation itself.
+
+### Rollback pointer
+
+Pre-state SHA: `028cc5a` (v0.5 commit). The repo path change does not affect git SHAs — `028cc5a` is reachable from the new location.
+
+### Deferred items
+
+Carried forward minus the now-completed move/symlink/GitHub push. Outstanding:
+- Risk Gate cosmetic-edit tuning question (re-evaluate after 10+ real persona edits)
+- Control-scenario eval-set tuning (low priority)
+- Long-context persona drift test (needs new methodology)
+- Session-ref convention (still using informal `local-session-YYYY-MM-DD-<slug>`)
+- Citation/grounding rule for Holdy
+- Knowledge-cutoff disclaimer for Holdy
+
+---
+
 ## 2026-05-09T00:00:00Z — 0.4 → 0.5 (Safe File Operations rule + Claude Code subagent frontmatter)
 
 - **Author / actor:** Holdy v0.4 (assisting user, Claude Code session)
