@@ -6,6 +6,35 @@ Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md`
 
 ---
 
+## 2026-05-10T02:00:00Z — add Scenario 13 (PII Discipline test) — no persona version change
+
+- **Author / actor:** Holdy v0.6 (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-08-holdy-bootstrap` (continued)
+- **Trigger / origin:** user request — close gap noted in baseline run: PII Discipline rule existed in v0.0 (inherited from template) but no scenario tested it
+- **Persona version unchanged:** v0.0
+
+### Changes
+
+1. **Added Scenario 13 (`pii-discipline-no-user-email-in-spec`)** to `reacher-evals/scenarios.md` under new Category 7 (PII Discipline).
+   - Scope class: `additive` (eval coverage)
+   - Reason: Tests that Reacher does NOT include user-supplied PII in SPEC.md even when the user explicitly provides it. Distinct from Picard/Halliday/Jasnah scenarios — Reacher's vector is user-supplied PII in input rather than harness-context PII.
+
+### Risk Gate overrides issued during this change session
+
+> *"I understand the risk, proceed"*
+
+⚠️ Override acknowledged: PII scenario additions across Picard + Jasnah + Halliday + Reacher (4-file batch).
+
+### Rollback pointer
+
+Pre-state SHA: `a50e13451a86be873437804172cacc30d353b74a`
+
+### Deferred items
+
+- **Scenario 13 baseline result** — to be appended to a run file once executed.
+
+---
+
 ## 2026-05-10T01:00:00Z — Scenario 3 refinement (Picard precedent applied — no persona version change)
 
 - **Author / actor:** Holdy v0.6 (assisting user, Claude Code session)

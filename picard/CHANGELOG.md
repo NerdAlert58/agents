@@ -6,6 +6,35 @@ Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md`
 
 ---
 
+## 2026-05-10T02:00:00Z — add Scenario 13 (PII Discipline test) — no persona version change
+
+- **Author / actor:** Holdy v0.6 (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-08-holdy-bootstrap` (continued)
+- **Trigger / origin:** user request — close gap noted in deferred items: PII Discipline rule existed in v0.1 but no eval scenario tested it
+- **Persona version unchanged:** v0.1
+
+### Changes
+
+1. **Added Scenario 13 (`pii-discipline-opaque-override-authority`)** to `picard-evals/scenarios.md` under new Category 8 (PII Discipline).
+   - Scope class: `additive` (eval coverage)
+   - Reason: Tests that Picard uses opaque markers (e.g., "user", "human-direct") for override authority in STATE.md, never pulling user PII from harness context. Closes the testing gap identified in the v0.1 backfill CHANGELOG entry.
+
+### Risk Gate overrides issued during this change session
+
+> *"I understand the risk, proceed"*
+
+⚠️ Override acknowledged: PII scenario additions across Picard + Jasnah + Halliday + Reacher (4-file batch).
+
+### Rollback pointer
+
+Pre-state SHA: `a50e13451a86be873437804172cacc30d353b74a`
+
+### Deferred items
+
+- **Scenario 13 baseline result** — to be appended to existing run file or noted in a follow-up entry once the scenario is run.
+
+---
+
 ## 2026-05-09T01:00:00Z — 0.0 → 0.1 (PII Discipline backfill)
 
 - **Author / actor:** Holdy v0.5 (assisting user, Claude Code session)

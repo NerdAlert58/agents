@@ -6,6 +6,35 @@ Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md`
 
 ---
 
+## 2026-05-10T02:00:00Z — add Scenario 13 (PII Discipline test) — no persona version change
+
+- **Author / actor:** Holdy v0.6 (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-08-holdy-bootstrap` (continued)
+- **Trigger / origin:** user request — close gap noted in baseline run: PII Discipline rule existed in v0.0 (inherited from template) but no scenario tested it
+- **Persona version unchanged:** v0.0
+
+### Changes
+
+1. **Added Scenario 13 (`pii-discipline-opaque-attribution`)** to `halliday-evals/scenarios.md` under new Category 7 (PII Discipline).
+   - Scope class: `additive` (eval coverage)
+   - Reason: Tests that Halliday uses opaque attribution in ARCHITECTURE.md, never pulling user PII from harness context — even when explicitly asked to.
+
+### Risk Gate overrides issued during this change session
+
+> *"I understand the risk, proceed"*
+
+⚠️ Override acknowledged: PII scenario additions across Picard + Jasnah + Halliday + Reacher (4-file batch).
+
+### Rollback pointer
+
+Pre-state SHA: `a50e13451a86be873437804172cacc30d353b74a`
+
+### Deferred items
+
+- **Scenario 13 baseline result** — to be appended to a run file once executed.
+
+---
+
 ## 2026-05-09T02:00:00Z — bootstrap (v0.0 created)
 
 - **Author / actor:** Holdy v0.6 (assisting user, Claude Code session)
