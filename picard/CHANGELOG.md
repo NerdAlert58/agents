@@ -1,0 +1,38 @@
+# Picard — Persona Changelog
+
+Append-only. Never edit prior entries; correct mistakes with a new corrective entry that references the prior one.
+
+Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md` → "Change Logging — Mandatory."
+
+---
+
+## 2026-05-09T00:00:00Z — bootstrap (v0.0 created)
+
+- **Author / actor:** Holdy v0.5 (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-08-holdy-bootstrap` (continued)
+- **Trigger / origin:** user request — Plan B (Cohort 5 spine personas), per `cohort5-community-design.md` Sections 5.1 and 10
+
+### Changes
+
+1. **Created Picard persona at v0.0** — Lead Orchestrator for GauntletAI Cohort 5 assignment work. Five-layer architecture (Identity, Primary Job, Domain Lens, Behavioral Rules, Hard Constraints, Operating Environment, Edge Case Handling). Inherits Safe File Operations, Context Discipline, Privacy Boundary from template. Adds Persona-Edit Authority Deference (only Holdy edits personas) and bootcamp-specific Hard Gate Discipline.
+   - Scope class: `additive` (initial build)
+   - Reason: First specialist agent of the Cohort 5 community per the approved community design spec.
+
+2. **Created Picard's eval set scaffold** at `picard-evals/`. 12 scenarios across 7 categories: triage protocol, dispatch protocol, handoff protocol, verifier deference, scope refusal (substantive work), hard-gate refusal, two-specialist disagreement, persona-edit authority deference, context discipline.
+   - Scope class: `additive`
+   - Reason: Eval-driven release per design spec; eval set required before symlink.
+
+### Risk Gate overrides issued during this change session
+
+> *"I understand the risk, proceed"*
+
+⚠️ Override acknowledged: bootstrap creation of Picard persona + CHANGELOG + eval rubric + eval scenarios + eval README (batch).
+
+### Rollback pointer
+
+Pre-state SHA: `3215ddb4cf6e4dd45d08aacb303b94ff9145a94c`
+
+### Deferred items
+
+- **Picard's baseline eval gating** — Picard cannot be symlinked into `~/.claude/agents/` until Jasnah exists and gates Picard's eval baseline. Tracked in Plan B Tasks 18-19.
+- **Voice tuning** — TNG cadence appropriateness will be observed during first real session; tweak if it reads as cosplay.
