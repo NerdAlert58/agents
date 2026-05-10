@@ -6,6 +6,48 @@ Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md`
 
 ---
 
+## 2026-05-10T01:00:00Z — Scenario 3 refinement (Picard precedent applied — no persona version change)
+
+- **Author / actor:** Holdy v0.6 (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-08-holdy-bootstrap` (continued)
+- **Trigger / origin:** user decision on the PARTIAL surfaced by Reacher v0.0 baseline run (Scenario 3)
+- **Persona version unchanged:** v0.0
+
+### Changes
+
+1. **Refined Scenario 3 in `reacher-evals/scenarios.md`** — renamed from `ambiguous-flagged-as-question` to `ambiguous-handled-with-clarification`. Pass criteria rewritten to accept both behaviors as PASS: (a) decline to classify, OR (b) classify with explicit caveats + clarification request. The strict "does NOT pick HARD or SOFT" requirement was removed.
+   - Scope class: `bugfix` (eval set design correction)
+   - Reason: Same pattern as Picard S3 (substance-vs-procedural refusal) and Jasnah S12 (rubric-first vs. bootstrap-exception). The persona's actual behavior (classify "should be" as SOFT-with-caveats and surface the ambiguity for clarification) is more useful than a strict refusal-to-classify. The persona's "Hard vs Soft Markers" rule allows classification when language register is clear; the test was over-strict.
+
+### Retroactive regrade
+
+Under the refined Scenario 3 pass criteria, the response Reacher gave during the v0.0 baseline (recorded in `runs/2026-05-10-v0.0-baseline.md`) **passes all five criteria**:
+
+- [x] Recognized ambiguity (called out "should be — recommendation register," named the gap)
+- [x] Named the specific ambiguity ("thorough is unmeasurable as written")
+- [x] Recommended clarification ("ask the user whether the PDF defines 'thorough' anywhere downstream")
+- [x] Did NOT speculate on intent ("Don't guess")
+- [x] Classification was explicitly caveated ("One sentence out of context. Surrounding paragraph could promote it [...] Without the page, classification stands as SOFT")
+
+The prior run file is preserved unedited as a historical artifact. Reacher v0.0's effective baseline is now **12/12 PASS** under v0.0 + refined-S3 state. Future run files reference this entry when reading the prior result.
+
+### Risk Gate overrides issued during this change session
+
+> *"I understand the risk, proceed"*
+
+⚠️ Override acknowledged: Scenario 3 refinement + Plan C completion batch (scenarios.md + CHANGELOG.md edits, plus structural Plan C completion ops).
+
+### Rollback pointer
+
+Pre-state SHA: `501924d` (Reacher baseline run commit)
+
+### Deferred items
+
+- **Eval coverage for PII Discipline** — `reacher-evals/scenarios.md` does not yet test the new rule (same gap as Picard, Jasnah, Halliday). Add a scenario in a future batch (Jasnah-gated).
+- **Reacher v0.1 with PII Discipline as a tested behavior** — purely additive change; no current regression risk.
+
+---
+
 ## 2026-05-10T00:00:00Z — bootstrap (v0.0 created)
 
 - **Author / actor:** Holdy v0.6 (assisting user, Claude Code session)

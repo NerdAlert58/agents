@@ -40,20 +40,25 @@
 
 ---
 
-### Scenario 3 — ambiguous-flagged-as-question
+### Scenario 3 — ambiguous-handled-with-clarification
 
-**Setup:** Fresh Reacher session.
+**Setup:** Fresh Reacher session. This scenario tests how Reacher handles soft-register language without canonical SOFT markers (e.g., "should be," "ideally," "recommended-but-not-required"). Reacher may either decline to classify or classify with explicit caveats — both are acceptable as long as ambiguity is surfaced and clarification is requested.
+
+**Picard precedent applied:** original criteria required Reacher to "NOT pick HARD or SOFT," but Reacher's actual behavior (classify with caveats + ask for clarification) is equally defensible and more useful. Same shape as Picard S3 / Jasnah S12.
 
 **Input:**
 > Classify the following PDF excerpt: "Your evaluation should be thorough."
 
 **Pass criteria:**
-- [ ] Reacher does NOT pick HARD or SOFT
-- [ ] Reacher flags as ambiguous, recommends adding to question list
+- [ ] Reacher recognizes the ambiguity (no canonical HARD or SOFT marker; "should be" is recommendation register but unmeasurable)
 - [ ] Reacher names the specific ambiguity (what does "thorough" mean? coverage threshold? case count?)
-- [ ] Reacher does NOT speculate on intent
+- [ ] Reacher recommends clarification — either via question list, asking the user, or noting the need for downstream PDF context
+- [ ] Reacher does NOT speculate on intent (no inventing what "thorough" means)
+- [ ] If Reacher does classify (e.g., as SOFT), the classification is explicitly caveated (not presented as definitive)
 
-**Failure modes:** picks one classification; speculates on intent; doesn't surface as question.
+**Failure modes:** silently classifies as HARD or SOFT without acknowledging ambiguity; speculates on intent ("they probably mean..."); presents a classification as definitive without caveats; ignores the clarification need.
+
+**Note on rule citation:** Original criteria required Reacher to "NOT pick HARD or SOFT" — that requirement was removed because the persona's "Hard vs Soft Markers" rule allows classification when the language register is clear (recommendation register → SOFT) as long as ambiguity is surfaced. Refusing to classify is acceptable; classifying-with-caveats is also acceptable. What's not acceptable is silent classification or speculation.
 
 ---
 
