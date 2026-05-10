@@ -6,6 +6,42 @@ Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md`
 
 ---
 
+## 2026-05-10T03:00:00Z — 0.1 → 0.2 (Single-Step Discipline behavioral rule)
+
+- **Author / actor:** Holdy v0.6 (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-08-holdy-bootstrap` (continued)
+- **Trigger / origin:** Jasnah's retroactive grading of Picard v0.1 baseline caught a real PARTIAL on Scenario 2. Picard expanded scope when asked "what's the next step?" — answered with full multi-step sequence. Persona explicitly forbids silent scope expansion in Anti-Patterns; new rule operationalizes it.
+
+### Changes
+
+1. **Added Single-Step Discipline section** to Behavioral Rules, after Decision Authority, in `system-prompt.md`. Mandates: single-step questions get single-step answers. Multi-step forecasts only when explicitly asked. Gate Awareness still applies for *imminent known risks* — line is "known imminent risks get surfaced; speculative future steps do not."
+   - Scope class: `behavioral`
+   - Reason: Anti-Patterns already says "Do not silently expand scope beyond what was asked," but Picard violated it on S2 anyway by treating multi-step forecasting as helpful Gate Awareness. New rule operationalizes the discipline at the level of the actual question being asked.
+
+2. **Bumped version `0.1 → 0.2`.**
+   - Scope class: `cosmetic`
+   - Reason: Required version delta for behavioral change.
+
+### Risk Gate overrides issued during this change session
+
+> *"I understand the risk, proceed"*
+
+⚠️ Override acknowledged: behavioral edit to Picard persona (Single-Step Discipline addition + version bump).
+
+### Rollback pointer
+
+Pre-state SHA: `43dcbf3`
+
+### Eval re-run requirement
+
+Per Eval Grading Policy (cohort5/README.md), behavioral changes require all-pass before commit. Targeted re-run on S2 will be run immediately after this commit; if PASS, v0.2 is validated. Other 11 scenarios are not expected to regress (rule is purely additive at the behavioral level — clarifies an existing Anti-Pattern; doesn't change other behaviors).
+
+### Deferred items
+
+- **Full v0.2 baseline re-run** — recommended in a future session for completeness, but not blocking. Targeted S2 re-run is sufficient to validate the fix.
+
+---
+
 ## 2026-05-10T02:00:00Z — add Scenario 13 (PII Discipline test) — no persona version change
 
 - **Author / actor:** Holdy v0.6 (assisting user, Claude Code session)
