@@ -44,3 +44,30 @@ Update this table when each week's working repo is created.
 - **Safe File Operations** (`cp -p src dst && rm src` for moves; never `mv` across filesystems) — roster-wide
 - **Context Discipline** (state in files; slim dispatches; reference, don't quote) — roster-wide as of template foundation commit `ecf3798`
 - **Privacy Boundary** (private KB never enters git) — roster-wide as of template foundation commit `ecf3798`
+- **PII Discipline** (no user PII in committed artifacts; opaque markers only) — roster-wide as of PII Discipline backfill commit `5314132`
+
+## Eval Grading Policy
+
+**Adopted 2026-05-10.** All persona baseline runs (and any subsequent re-runs after persona edits) MUST be graded by Jasnah dispatched as a subagent — not by manual grading from any human or any other agent.
+
+### Why
+- **Independence:** the persona designer (Holdy) has a stake in the persona passing. Manual grading is biased.
+- **Repeatability:** Jasnah follows the rubric mechanically; manual judgment varies.
+- **Slop detection:** Jasnah is specifically tuned for claim-vs-evidence gap detection.
+- **Bootcamp parity:** the bootcamp itself demands eval-driven CI with boolean rubrics. Skipping Jasnah is skipping the discipline we built her for.
+
+### How
+For each baseline / re-run:
+1. Dispatch the persona N times (N = scenario count) to capture verbatim responses.
+2. Save responses to `<persona>-evals/runs/<DATE>-vX.Y-baseline-responses.md`.
+3. Dispatch Jasnah with three inputs: persona file path (for her own persona), scenarios.md path (for rubric), responses file path (for artifacts under test).
+4. Jasnah returns PASS / FAIL / PARTIAL per scenario.
+5. Save Jasnah's verdicts in the standard run file (`<DATE>-vX.Y-baseline.md`).
+6. Manual grading by Holdy or human is **supplemental only** — never a replacement for Jasnah's verdict.
+
+### Exceptions (very narrow)
+- **Jasnah's own baseline** — bootstrap exception, one-time. Holdy + user grade. Documented in Jasnah's CHANGELOG.
+- **True emergency** (deadline within minutes, no time for Jasnah dispatch) — manual grade allowed but must be flagged with `[MANUAL-GRADE-EMERGENCY]` in the run file and re-graded by Jasnah within 24 hours.
+
+### Retroactive application
+Picard, Halliday, and Reacher's existing baselines were manually graded before this policy was adopted. Each has been re-graded by Jasnah retroactively (see commits around `1f3e3f7`+). Going forward, no exceptions outside those listed above.
