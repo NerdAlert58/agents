@@ -46,6 +46,50 @@ Update this table when each week's working repo is created.
 - **Privacy Boundary** (private KB never enters git) — roster-wide as of template foundation commit `ecf3798`
 - **PII Discipline** (no user PII in committed artifacts; opaque markers only) — roster-wide as of PII Discipline backfill commit `5314132`
 
+## Playbooks (Plan D)
+
+Codified workflows for general-purpose subagents — cheaper than personas, promoted to personas only when usage proves the need.
+
+| Playbook | Purpose | Picard dispatches when |
+|---|---|---|
+| `audit.md` | Produce `AUDIT.md` covering 5 categories from a forked codebase | After Reacher's SPEC.md exists; before Halliday's architecture work |
+| `user-definition.md` | Produce `USERS.md` — narrow primary user, workflow, use cases | After audit; before Halliday's architecture work |
+| `cost-analysis.md` | Produce `AI_COST_ANALYSIS.md` — per-session cost + multi-tier projections | After ARCHITECTURE.md exists; before final submission |
+| `interview-prep.md` | Produce `_agents/INTERVIEW-PREP.md` — hostile question drills + defense narrative | Before each AI Interview deadline |
+
+Full list of deferred playbooks (write when needed) in `~/Git/agents/_playbooks/README.md`.
+
+### Promotion criteria (playbook → persona)
+
+When all three are true, Picard surfaces a playbook as a promotion candidate:
+1. Used in 3+ real assignments
+2. General-purpose output has needed material rework 2+ times
+3. Role has stable enough scope to be tightly characterized (one-sentence identity)
+
+User decides; if approved, Holdy designs the persona; Jasnah eval-gates the launch; playbook moves to `_archived/`.
+
+## Week 3 Runbook (when the PDF drops)
+
+Picard follows this sequence on Week 3 kickoff:
+
+1. **You** tell Picard the working repo path for Week 3 (e.g., `~/Gauntlet/cohort5-week3/` — your call on naming)
+2. **Picard** creates `_agents/` in the working repo and seeds `STATE.md` with path constants and current phase ("intake pending")
+3. **Picard** dispatches **Reacher** with the Week 3 PDF path; Reacher produces `_agents/SPEC.md` + capped 5-question list
+4. **You** answer Reacher's questions; Picard appends answers to STATE.md
+5. **Picard** dispatches `general-purpose` with `_playbooks/audit.md`; output → `<working_repo>/AUDIT.md`
+6. **Picard** dispatches **Jasnah** to verify AUDIT.md against the playbook's pass criteria
+7. **Picard** dispatches `general-purpose` with `_playbooks/user-definition.md`; output → `<working_repo>/USERS.md`
+8. **Picard** dispatches **Jasnah** to verify USERS.md
+9. **Picard** dispatches **Halliday** with USERS.md + AUDIT.md + SPEC.md → `<working_repo>/ARCHITECTURE.md`
+10. **Picard** dispatches **Jasnah** to verify ARCHITECTURE.md (this is the Architecture Defense gate)
+11. **Picard** dispatches `general-purpose` with `_playbooks/cost-analysis.md`; output → `<working_repo>/AI_COST_ANALYSIS.md` (later in week)
+12. **Picard** dispatches `general-purpose` with `_playbooks/interview-prep.md`; output → `<working_repo>/_agents/INTERVIEW-PREP.md` (24h before each AI Interview)
+13. End-of-week: **You** write `weekN/LEARNINGS.md` in `~/Desktop/Gauntlet/KnowledgeBase/` (private; never enters git per Privacy Boundary)
+
+**Picard maintains `_agents/STATE.md` throughout.** Phase, paths, blockers, decisions, override log, dispatch log.
+
+If a surprise mid-week PDF drops (per Week 2 pattern): Picard dispatches Reacher again with the surprise PDF; Reacher produces `_agents/SPEC-surprise.md` referencing the parent SPEC.md. Halliday produces a delta-architecture document referencing the parent ARCHITECTURE.md.
+
 ## Eval Grading Policy
 
 **Adopted 2026-05-10.** All persona baseline runs (and any subsequent re-runs after persona edits) MUST be graded by Jasnah dispatched as a subagent — not by manual grading from any human or any other agent.
