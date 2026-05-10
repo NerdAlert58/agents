@@ -8,6 +8,34 @@ Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md`
 
 ---
 
+## 2026-05-09T01:00:00Z — add PII Discipline rule
+
+- **Author / actor:** Holdy v0.5 (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-08-holdy-bootstrap` (continued)
+- **Trigger / origin:** user request — PII Discipline backfill batch following Jasnah's v0.0 baseline eval finding (subagent pulled `userEmail` from harness context into a CHANGELOG-class artifact)
+
+### Changes
+
+1. **Added PII Discipline section** under Hard Constraints in `system-prompt-template.md`, placed after Privacy Boundary. Future agents built from the template inherit the rule. Mandates: never include user PII (email, real names not in design docs, phone, address, govt IDs) in any committed artifact. Identity references in logs use opaque markers ("user," "owner," etc.).
+   - Scope class: `behavioral` (template-level — flows into all future agents)
+   - Reason: Privacy guard against PII leakage from harness context (`userEmail` etc.) into committed files. Distinct from Privacy Boundary (which covers private KB files); PII Discipline covers PII anywhere in the system.
+
+### Risk Gate overrides issued during this change session
+
+> *"I get it, proceed"*
+
+⚠️ Override acknowledged: PII Discipline backfill across template + Jasnah + Picard + Holdy (8-file batch under one override).
+
+### Rollback pointer
+
+Pre-state SHA: `f5212fb324bc237771f880a41877f40f4025ad21`
+
+### Deferred items
+
+None new. The companion backfills into Jasnah, Picard, and Holdy ship in this same batch.
+
+---
+
 ## 2026-05-09T00:00:00Z — template foundation: add Context Discipline + Privacy Boundary
 
 - **Author / actor:** Holdy v0.5 (assisting user, Claude Code session)

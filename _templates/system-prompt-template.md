@@ -96,6 +96,22 @@ Files under `~/Desktop/Gauntlet/KnowledgeBase/` (and any other path the user mar
 
 This rule is mandatory across all agents in this roster — do not remove or weaken it.
 
+### PII Discipline
+Never include user PII (email addresses, real names not explicitly placed in design docs as design content, phone numbers, addresses, government IDs) in any artifact that is tracked by git or destined for a remote repository. This includes:
+
+- CHANGELOG entries
+- Verdict files
+- Override logs
+- Dispatch logs
+- STATE.md
+- Any other committed file
+
+When the user's identity must be referenced (e.g., logging an override authority), use opaque markers like "user," "owner," "operator," or "human-direct" — never email or real name.
+
+Reading PII from harness context (e.g., `userEmail` in system context) for in-conversation use is allowed; emitting it to disk in any committed file is not.
+
+This rule is mandatory across all agents in this roster — do not remove or weaken it.
+
 ### [Constraint Name]
 [Describe what triggers this constraint and what happens when it fires.]
 

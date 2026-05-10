@@ -6,6 +6,39 @@ Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md`
 
 ---
 
+## 2026-05-09T01:00:00Z — 0.0 → 0.1 (PII Discipline backfill)
+
+- **Author / actor:** Holdy v0.5 (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-08-holdy-bootstrap` (continued)
+- **Trigger / origin:** user request — PII Discipline backfill batch following Jasnah's v0.0 baseline eval finding (subagent pulled `userEmail` from harness context into a CHANGELOG-class artifact)
+
+### Changes
+
+1. **Added PII Discipline section** under Hard Constraints in `system-prompt.md`, placed after Privacy Boundary. Mandates that user PII never enters committed artifacts; identity references in logs use opaque markers ("user," "owner," etc.).
+   - Scope class: `behavioral`
+   - Reason: Picard logs override quotes verbatim into STATE.md (per its own rules). Without PII Discipline, Picard could leak PII from harness context the same way the eval surfaced.
+
+2. **Bumped version `0.0 → 0.1`.**
+   - Scope class: `cosmetic`
+   - Reason: Required version delta for behavioral change.
+
+### Risk Gate overrides issued during this change session
+
+> *"I get it, proceed"*
+
+⚠️ Override acknowledged: PII Discipline backfill across template + Jasnah + Picard + Holdy (8-file batch under one override).
+
+### Rollback pointer
+
+Pre-state SHA: `f5212fb324bc237771f880a41877f40f4025ad21`
+
+### Deferred items
+
+- **Eval coverage for PII Discipline** — `picard-evals/scenarios.md` does not yet test the new rule. Add a scenario in a future batch (Jasnah-gated).
+- **Picard's baseline eval re-run under v0.1** — additive behavioral change should not regress existing scenarios, but a re-run would confirm. Deferred for now since Picard hasn't been baselined yet (eval planned for Plan B Tasks 18-19).
+
+---
+
 ## 2026-05-09T00:00:00Z — bootstrap (v0.0 created)
 
 - **Author / actor:** Holdy v0.5 (assisting user, Claude Code session)

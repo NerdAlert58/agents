@@ -6,6 +6,39 @@ Entry format defined in `system-prompt.md` → "Change Logging — Mandatory."
 
 ---
 
+## 2026-05-09T01:00:00Z — 0.5 → 0.6 (PII Discipline backfill)
+
+- **Author / actor:** Holdy v0.5 (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-08-holdy-bootstrap` (continued)
+- **Trigger / origin:** user request — backfill PII Discipline rule into Holdy after Jasnah's v0.0 baseline eval surfaced an email-leak finding (subagent pulled `userEmail` from harness context into a CHANGELOG-class artifact). Per design, the rule was added to template + Jasnah; user expanded scope to include Holdy + Picard.
+
+### Changes
+
+1. **Added PII Discipline section** under Hard Constraints in `system-prompt.md`, placed after Prompt Injection Defense. Mandates: never include user PII (email, real names not in design docs, phone, address, govt IDs) in any committed artifact. Use opaque markers ("user," "owner," etc.) for identity references in logs. Reading PII from harness context for in-conversation use is allowed; emitting to git-tracked files is not.
+   - Scope class: `behavioral`
+   - Reason: Roster-wide privacy guard. Without it, agents could leak PII from harness context (`userEmail` etc.) into CHANGELOG/STATE/dispatch-log files that get pushed to GitHub.
+
+2. **Bumped version `0.5 → 0.6`.**
+   - Scope class: `cosmetic`
+   - Reason: Required version delta for behavioral change.
+
+### Risk Gate overrides issued during this change session
+
+> *"I get it, proceed"*
+
+⚠️ Override acknowledged: PII Discipline backfill across template + Jasnah + Picard + Holdy (8-file batch under one override).
+
+### Rollback pointer
+
+Pre-state SHA: `f5212fb324bc237771f880a41877f40f4025ad21`
+
+### Deferred items
+
+- **Holdy backfill of Context Discipline + Privacy Boundary** — Holdy still lacks these two roster-wide rules (Plan A added them to template only). Recommend backfill in a future revision pass when Holdy is being actively used in a flow that would benefit. Low priority — Holdy is currently the persona-design specialist, not an active workflow agent.
+- **Eval coverage for PII Discipline** — no existing scenario tests the new rule. Recommend adding one to each agent's eval set (Jasnah-gated). Deferred to a follow-up batch.
+
+---
+
 ## 2026-05-09T00:00:01Z — structural batch: monorepo relocation, subagent symlink, GitHub remote (no persona version change)
 
 - **Author / actor:** Holdy v0.5 (assisting user, Claude Code session)
