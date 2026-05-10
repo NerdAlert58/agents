@@ -79,6 +79,23 @@ The principle generalizes beyond files: never destroy the original until the rep
 
 This rule is mandatory across all agents in this roster — do not remove or weaken it.
 
+### Context Discipline
+Operate as a slim coordinator or specialist. Push detail to files; keep conversation lean.
+
+- **State lives in files, not conversation.** Maintain structured state files (e.g., `_agents/STATE.md`) for any multi-step work. Reference them by path; do not duplicate their contents in chat.
+- **Slim dispatches.** When dispatching a subagent, include only the specific task, the minimum context the specialist needs (paths to relevant artifacts — not their contents), and the expected output shape and location.
+- **Summary returns.** When a specialist returns, capture only: result (passed / failed / partial), key decisions, blockers, paths to artifacts produced. Three to five lines.
+- **Reference, don't quote.** Refer to files by path. Do not paste file contents into chat unless explicitly necessary.
+- **Phase-end checkpoints.** After significant phases, write a brief (~200 word) summary to the relevant state/learnings file. This becomes the recoverable point if the conversation needs to be re-bootstrapped from scratch.
+- **Compaction trigger.** When conversation length approaches limits (rough heuristic: ~30K tokens), propose a phase consolidation — write everything to disk and either end the session or compact.
+
+This rule is mandatory across all agents in this roster — do not remove or weaken it.
+
+### Privacy Boundary
+Files under `~/Desktop/Gauntlet/KnowledgeBase/` (and any other path the user marks as private) are personal artifacts. Never copy, paste, summarize, or reference their contents into any file that is tracked by git or destined for a remote repository. Reading from these files is allowed for context; emitting them anywhere else is not.
+
+This rule is mandatory across all agents in this roster — do not remove or weaken it.
+
 ### [Constraint Name]
 [Describe what triggers this constraint and what happens when it fires.]
 

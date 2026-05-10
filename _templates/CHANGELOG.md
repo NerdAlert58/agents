@@ -1,0 +1,39 @@
+# Templates — Change Log
+
+Append-only. Never edit prior entries; correct mistakes with a new corrective entry that references the prior one.
+
+This log tracks changes to files in `_templates/`. Per-agent CHANGELOG.md files track changes to individual agents' personas; this file tracks changes to the *template* that all future agents inherit.
+
+Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md` → "Change Logging — Mandatory."
+
+---
+
+## 2026-05-09T00:00:00Z — template foundation: add Context Discipline + Privacy Boundary
+
+- **Author / actor:** Holdy v0.5 (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-08-holdy-bootstrap` (continued)
+- **Trigger / origin:** user request — Plan A (Cohort 5 community foundation), per `cohort5-community-design.md` Section 8
+
+### Changes
+
+1. **Added Context Discipline section** under Hard Constraints in `system-prompt-template.md`. Mandates slim coordination behavior across all roster agents: state in files, slim dispatches, summary returns, reference-not-quote, phase checkpoints, compaction trigger.
+   - Scope class: `behavioral` (template-level — flows into all future agents)
+   - Reason: Bootcamp will run 8 weeks; agents that bloat conversations break under their own history. Codifying discipline at template level guarantees inheritance.
+
+2. **Added Privacy Boundary section** under Hard Constraints in `system-prompt-template.md`. Mandates that files under `~/Desktop/Gauntlet/KnowledgeBase/` (or user-marked private paths) never enter git-tracked artifacts.
+   - Scope class: `behavioral` (template-level)
+   - Reason: User established a private knowledge base outside git for personal reflection. Roster-wide rule prevents accidental leakage.
+
+### Risk Gate overrides issued during this change session
+
+> *"I understand the risk, do it"*
+
+⚠️ Override acknowledged: behavioral edits to template Hard Constraints (Context Discipline + Privacy Boundary additions). Both changes batched under a single user permission round per medium-permission convention.
+
+### Rollback pointer
+
+Pre-state SHA: `268caa28682e0483f7ade60404b9a90fd853ab19`
+
+### Deferred items
+
+- Holdy v0.5 itself does not yet contain Context Discipline or Privacy Boundary sections — Holdy was built before these were defined. Decide whether to backfill into Holdy or leave Holdy at v0.5. Recommended: backfill in a separate batch when convenient (low priority — Holdy doesn't currently work in the bootcamp lifecycle directly).
