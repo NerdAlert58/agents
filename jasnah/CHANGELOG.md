@@ -6,6 +6,51 @@ Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md`
 
 ---
 
+## 2026-05-11T15:30:00Z — 0.1 → 0.2 (Coverage Rubric for test-set review)
+
+- **Author / actor:** Holdy v0.7 (assisting user, Claude Code session)
+- **Session ref:** local-session-2026-05-10-resume-and-workflow
+- **Trigger / origin:** Test-gated workflow design (PR #3, merged) Phase 4 — give Jasnah the completion-gatekeeper-role behaviors required by the workflow for grading test sets.
+
+### Changes
+
+1. **Added Test-Set Coverage Review behavioral rule** to `system-prompt.md`, after LLM-as-Judge Discipline. Defines the canonical Coverage Rubric (5 dimensions: happy path / documented failure modes / boundary values / empty-null-malformed / concurrent-access-if-stateful). Per-criterion verdict applies. On PASS, returns a SHA-256 hash of approved test content for downstream lock application; Jasnah does NOT apply the lock herself.
+   - Scope class: `behavioral`
+   - Reason: The test-gated workflow requires a completion-gatekeeper to grade test sets against a fixed, documented rubric. Without this rule, Jasnah has no canonical rubric for test reviews and would either refuse (Rubric-First) or build one ad-hoc each time.
+
+2. **Added Incremental Test Review behavioral rule** for mid-implementation single-test grading triggered by implementer-challenge events. Scoped to the new test only; does not re-open previously-locked tests.
+   - Scope class: `behavioral`
+   - Reason: The implementer-challenge mechanism (design doc §4 Tier 1 step 6) requires fast, narrow gatekeeper reviews to keep the implementation loop moving. Without this rule, every uncovered-path event would either trigger a full re-grade (re-opening the locked surface) or be silently skipped.
+
+3. **Updated Operating Environment** to document inputs for both coverage reviews and incremental reviews, and to specify that PASS coverage reviews return a content hash.
+   - Scope class: `behavioral` (clarification of dispatch contract)
+   - Reason: The new behaviors need a documented dispatch interface so Picard (and other dispatchers) know what to pass in and what to expect back.
+
+4. **Bumped version `0.1 → 0.2`.**
+   - Scope class: `cosmetic`
+   - Reason: Required version delta for behavioral change.
+
+### Risk Gate overrides issued during this change session
+
+> *"knock out phases 2-4 in parallel"*
+
+⚠️ Override acknowledged: behavioral edit to Jasnah persona (Coverage Rubric + Incremental Review + Operating Environment update + version bump).
+
+### Rollback pointer
+
+Pre-state: master at `cd9dca1` (Phase 1 merge)
+
+### Eval re-run requirement
+
+Per Eval Grading Policy, behavioral changes require eval re-run before considering the change shipped. **This commit ships the persona change to the branch and opens the PR; the eval re-run is deferred to a follow-up commit before merge.** The branch should not be merged until evals pass on the new v0.2 baseline.
+
+### Deferred items
+
+- **Jasnah v0.2 baseline eval** — full scenario re-run required before merging this PR. Behavioral additions should not regress existing scenarios but should be confirmed.
+- **New eval scenarios for Coverage Rubric** — Jasnah's eval set does not yet test the Coverage Rubric application, the hash-on-PASS contract, or the incremental review scoping. Add as additive eval scenarios in a future batch.
+
+---
+
 ## 2026-05-10T02:00:00Z — add Scenario 13 (dedicated PII Discipline test) — no persona version change
 
 - **Author / actor:** Holdy v0.6 (assisting user, Claude Code session)
