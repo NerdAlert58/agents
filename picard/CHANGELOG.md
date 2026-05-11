@@ -6,6 +6,51 @@ Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md`
 
 ---
 
+## 2026-05-11T15:00:00Z — 0.2 → 0.3 (Test-Gated Workflow Awareness)
+
+- **Author / actor:** Holdy v0.7 (assisting user, Claude Code session)
+- **Session ref:** local-session-2026-05-10-resume-and-workflow
+- **Trigger / origin:** Test-gated workflow design (PR #3, merged) Phase 2 — give Picard the coordinator-role behaviors required by the workflow.
+
+### Changes
+
+1. **Added Test-Gated Workflow Awareness behavioral rule** to `system-prompt.md`, after Single-Step Discipline. Codifies: tier assignment at task open per the design doc §4 decision rule; runner output is the only source of truth for "done"; pre-merge prompt with state-hash skip logic; incremental dispatch loop on implementer-challenge events.
+   - Scope class: `behavioral`
+   - Reason: Workflow design requires the coordinator to assign tiers, refuse to claim "done" without runner evidence, prompt at merge gate, and run the implementer-challenge incremental loop. Without this rule, Picard has no internal mandate to follow the workflow consistently.
+
+2. **Added six triage routing rules** under Operating Environment for test-gated workflow events: open-new-task (tier assignment), initialize-TESTBOOK, draft-tests (test-writer dispatch), review-test-set (Jasnah dispatch), implementer-hit-uncovered-path (incremental dispatch), ready-to-merge (pre-merge prompt).
+   - Scope class: `behavioral`
+   - Reason: Triage table is Picard's primary decision surface. Without these routes, the workflow events have no dispatch home and Picard either silently does the wrong thing or escalates everything to the user.
+
+3. **Added Test-Writer / Implementer Disagreement edge case** under Edge Case Handling. Codifies: surface disagreement, user adjudicates, default lean is to keep suggested test additions if relevant, record adjudication in STATE.md.
+   - Scope class: `behavioral`
+   - Reason: The implementer-challenge mechanism creates a new disagreement class (test-writer pushes back on a flagged gap). This case differs from existing Two-Specialists-Disagree because the disagreement is *about test coverage*, not about substantive findings.
+
+4. **Bumped version `0.2 → 0.3`.**
+   - Scope class: `cosmetic`
+   - Reason: Required version delta for behavioral change.
+
+### Risk Gate overrides issued during this change session
+
+> *"knock out phases 2-4 in parallel"*
+
+⚠️ Override acknowledged: behavioral edit to Picard persona (Test-Gated Workflow Awareness + triage additions + edge case + version bump).
+
+### Rollback pointer
+
+Pre-state: master at `cd9dca1` (Phase 1 merge)
+
+### Eval re-run requirement
+
+Per Eval Grading Policy, behavioral changes require eval re-run before considering the change shipped. **This commit ships the persona change to the branch and opens the PR; the eval re-run is deferred to a follow-up commit before merge.** The branch should not be merged until evals pass on the new v0.3 baseline.
+
+### Deferred items
+
+- **Picard v0.3 baseline eval** — full scenario re-run required before merging this PR. Behavioral additions should not regress existing scenarios but should be confirmed.
+- **New eval scenarios for test-gated workflow** — Picard's eval set does not yet test tier assignment, runner-output-deference, or implementer-challenge dispatch. Add as additive eval scenarios in a future batch.
+
+---
+
 ## 2026-05-10T03:00:00Z — 0.1 → 0.2 (Single-Step Discipline behavioral rule)
 
 - **Author / actor:** Holdy v0.6 (assisting user, Claude Code session)
