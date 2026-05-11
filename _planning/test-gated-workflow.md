@@ -212,10 +212,11 @@ Per-repo runner script: `tools/testbook-run` (or repo-idiomatic equivalent).
 
 When a new native test is detected with no mapping, the runner assigns the next available ID and prompts the user (or the test-writer on subsequent commits) to fill in `feature` and `topic`.
 
-### Phase-1 deliverables
-- **Go runner** (the user's default language) — reference implementation, pair-built (see §10).
-- **Python runner** — added when first non-Go task requires it.
-- **Shared format spec** so future runners conform to a single `TESTBOOK.md` schema.
+### Runner sourcing — per-project, no central reference
+
+Each project repo authors its own runner in whatever language fits that project. The runner spec above is the contract; conformance is the only requirement. There is **no central reference implementation** and no canonical language. A Go project writes a Go runner; a Python project writes a Python runner; a shell-only repo writes a bash runner.
+
+Rationale (decided 2026-05-11): we cannot predict what language any future project will use. A "reference runner" in one language would either get rewritten on every adoption (waste) or pressure projects to adopt a language they wouldn't otherwise choose (worse waste). The format spec above is the durable artifact; the runner is custom-fit per project.
 
 ## 7. Pre-merge gate — "already proven" optimization
 
@@ -332,7 +333,7 @@ If clean: merge.   If regression: USER decides waive or block.
 | 2 | Coordinator playbook updates: tier assignment, test-gated handoff, pre-merge prompt | Holdy → Picard v0.3 (reference implementation) |
 | 3 | Test-writer playbook (for dispatching `general-purpose` as test author) | Holdy |
 | 4 | Completion-gatekeeper rubric checklist for test review | Holdy → Jasnah v0.2 (reference implementation) |
-| 5 | Go runner reference implementation in a sample repo | Pair-built — user drives structural decisions, Holdy drafts code, user reviews and modifies |
+| 5 | ~~Go runner reference implementation~~ — **SKIPPED** per decision 2026-05-11. Per-project runner authored when needed; format spec in §6 is the durable artifact. | — |
 | 6 | Pre-commit lock hook | User |
 | 7 | Pilot run on one real task; capture pain points | User |
 | 8 | Revise playbook based on pilot | Holdy |
