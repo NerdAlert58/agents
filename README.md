@@ -32,7 +32,11 @@ The five-layer architecture used to build Holdy is the standard template for all
 
 | Agent | Role | Status | Version |
 |---|---|---|---|
-| holdy | Principal AI Agent Architect / Reviewer | active | v0.5 |
+| holdy | Principal AI Agent Architect / Reviewer | active | v0.7 |
+| picard | Lead coordinator for GauntletAI Cohort 5 weekly assignments; triage, dispatch, lifecycle tracking | active | v0.2 |
+| reacher | PDF Intake Analyst; converts assignment PDFs into structured SPEC.md with HARD/SOFT gates and ≤5 clarifying questions | active | v0.0 |
+| halliday | Systems Architect; produces ARCHITECTURE.md with trust boundaries, failure modes, and scale analysis | active | v0.0 |
+| jasnah | Completion Gatekeeper; refuses to call work "done" without a written boolean rubric | active | v0.1 |
 
 Add new rows as you build agents.
 
