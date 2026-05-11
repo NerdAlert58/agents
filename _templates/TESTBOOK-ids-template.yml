@@ -1,0 +1,48 @@
+# TESTBOOK-ids.yml — stable-ID mapping for test-gated workflow
+#
+# Maps each stable ID to its native test name and metadata. The runner
+# uses this to:
+#   - Translate native test names → IDs in TESTBOOK.md
+#   - Detect retired tests (in this file, missing from current test suite)
+#   - Detect new tests (in current test suite, missing from this file)
+#
+# Rules:
+#   - IDs are monotonically increasing integers, zero-padded to 3 digits
+#     in TESTBOOK.md (but stored as integers here).
+#   - Once assigned, an ID never refers to a different test. Retired
+#     tests keep their entry with `retired: YYYY-MM-DD` set.
+#   - The runner appends new entries with auto-assigned IDs. Humans
+#     or agents fill in feature/topic/tier after creation.
+#
+# Full spec: ~/Git/agents/_planning/test-gated-workflow.md
+
+# Example entries (delete once you have real ones):
+
+# - id: 1
+#   native: TestLoginWithValidCredentials
+#   feature: User authentication
+#   topic: Login flow
+#   tier: 1
+#   added: 2026-05-11
+#   locked: true
+#   lock_hash: abc123def456...
+#
+# - id: 2
+#   native: TestLoginWithWrongPassword
+#   feature: User authentication
+#   topic: Login flow
+#   tier: 1
+#   added: 2026-05-11
+#   locked: true
+#   lock_hash: 789xyz...
+#
+# - id: 6
+#   native: TestDeprecatedLoginEndpoint
+#   feature: User authentication
+#   topic: Login flow
+#   tier: 1
+#   added: 2026-04-01
+#   retired: 2026-05-10
+#   retirement_reason: superseded by ID 004 after auth refactor
+
+tests: []
