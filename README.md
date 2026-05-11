@@ -108,6 +108,20 @@ Full text of this rule lives in `holdy/system-prompt.md` under "Persona-Edit Aut
 
 ---
 
+## Git Workflow — No Direct Pushes to master/main
+
+This repo enforces a feature-branch + pull-request workflow. Direct pushes to `master` or `main` are blocked by a versioned pre-push hook at `.githooks/pre-push`.
+
+**One-time setup per clone:**
+
+```bash
+git config core.hooksPath .githooks
+```
+
+After that, any `git push` targeting `master` or `main` will be rejected with an explanatory message. Push feature branches and open PRs instead. To bypass intentionally (rare), pass `--no-verify` to `git push`.
+
+---
+
 ## Safe File Operations
 
 All agents in this roster operate under a mandatory Safe File Operations rule:
