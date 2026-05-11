@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Pre-push guard: refuse to push directly to master/main.
+#
+# All changes must go through a feature branch + pull request.
+# To bypass intentionally (rare), pass --no-verify to git push.
+#
+# Install: from the repo root, run
+#   git config core.hooksPath .githooks
+# (one-time per clone).
+
+set -euo pipefail
+
+protected_branches_regex='^refs/heads/(master|main)$'
+
+# git provides one line per ref being pushed on stdin:
+#   <local_ref> <local_sha> <remote_ref> <remote_sha>
+while read -r local_ref local_sha remote_ref remote_sha; do
+    if [[ "$remote_ref" =~ $protected_branches_regex ]]; then
+        echo "✖ pre-push hook: direct push to '$remote_ref' is blocked." >&2
+        echo "  Push a feature branch and open a pull request instead." >&2
+        echo "  To override (not recommended): git push --no-verify ..." >&2
+        exit 1
+    fi
+done
+
+exit 0
