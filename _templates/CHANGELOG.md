@@ -65,3 +65,24 @@ Pre-state SHA: `268caa28682e0483f7ade60404b9a90fd853ab19`
 ### Deferred items
 
 - Holdy v0.5 itself does not yet contain Context Discipline or Privacy Boundary sections — Holdy was built before these were defined. Decide whether to backfill into Holdy or leave Holdy at v0.5. Recommended: backfill in a separate batch when convenient (low priority — Holdy doesn't currently work in the bootcamp lifecycle directly).
+
+---
+## 2026-05-12T18:00:00Z — add Charter Reflection rule + Privacy Boundary directional clarification
+
+- **Author / actor:** Holdy (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-12-kb-write-charter`
+- **Trigger / origin:** user request — personas were expected to write per-session reflections to the private KB during the May 11–12 spec+plan session but did not. Charter Reflection is added at the template level so future agents inherit the rule.
+
+### Changes
+
+1. **Added Charter Reflection section** under Hard Constraints in `system-prompt-template.md`, placed between Context Discipline and Privacy Boundary. Future agents built from the template inherit the rule. Defines a narrow exception to Privacy Boundary's one-way flow: agents may append reflection entries to `~/Desktop/Gauntlet/KnowledgeBase/weekN/LEARNINGS.md` under a strict three-part trigger. Includes file-target derivation from `_planning/cohort5/CURRENT_WEEK`, entry-shape template (≤120 words), POSIX append mechanic, four failure modes, and a subagent rule. Template version uses an HTML-comment placeholder where each concrete persona appends its lens-specific line.
+   - Scope class: `behavioral` (template-level — flows into all future agents)
+   - Reason: enable per-session reflection capture by personas in a directional-but-permitted way; preserve Privacy Boundary integrity.
+
+2. **Added directional clarification** to Privacy Boundary section: one-line note that the prohibition governs *KB → git-tracked* outflow only and does not prohibit *agent → KB* writes under Charter Reflection.
+   - Scope class: `clarifying` (no behavior change to outflow rule)
+   - Reason: prevents conflicting reads of the two rules.
+
+### Rollback pointer
+
+Pre-state SHA: `28e8c04cfe6ae453889a4b4a5afed2305ddc2ada`

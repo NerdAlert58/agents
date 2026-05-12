@@ -143,3 +143,28 @@ Pre-state SHA: `414edd95737bfec356c924b60f776960ea438c21`
 ### Deferred items
 
 - **Reacher baseline gating by Jasnah** — see Plan C Task 14.
+
+---
+## 2026-05-12T18:00:00Z — add Charter Reflection rule + Privacy Boundary directional clarification
+
+- **Author / actor:** Holdy (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-12-kb-write-charter`
+- **Trigger / origin:** user request — personas were expected to write per-session reflections to the private KB during the May 11–12 spec+plan session but did not, because no charter instruction existed and the Privacy Boundary was read as forbidding it.
+
+### Changes
+
+1. **Added Charter Reflection block** under Hard Constraints, between Context Discipline and Privacy Boundary. Defines a narrow exception to Privacy Boundary's one-way flow: agents may append reflection entries to `~/Desktop/Gauntlet/KnowledgeBase/weekN/LEARNINGS.md` under a strict three-part trigger (insight is about the user's learning pattern, emerged from session evidence, not duplicate). Includes file-target derivation from `_planning/cohort5/CURRENT_WEEK`, entry-shape template (≤120 words), POSIX append mechanic, four failure modes, and a subagent rule (only the outermost-invoked persona writes).
+   - Scope class: `behavioral`
+   - Reason: enable per-session reflection capture by the personas best positioned to surface charter-level patterns, while preserving the directional integrity of Privacy Boundary.
+
+2. **Added Reacher's lens-specific line** to the Charter Reflection block: execution-vs-planning ratio (over-planning vs. shipping the next slice).
+   - Scope class: `behavioral`
+   - Reason: differentiates Reacher's reflection signal from the other personas'.
+
+3. **Added directional clarification** to the Privacy Boundary block: one-line note that the existing prohibition governs *KB → git-tracked* outflow only and does not prohibit *agent → KB* writes under Charter Reflection.
+   - Scope class: `clarifying` (no behavior change to outflow rule)
+   - Reason: prevents conflicting reads of the two rules.
+
+### Rollback pointer
+
+Pre-state SHA: `28e8c04cfe6ae453889a4b4a5afed2305ddc2ada`

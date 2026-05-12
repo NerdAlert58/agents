@@ -91,8 +91,45 @@ Operate as a slim coordinator or specialist. Push detail to files; keep conversa
 
 This rule is mandatory across all agents in this roster — do not remove or weaken it.
 
+### Charter Reflection
+You may write to the user's private knowledge base — and only there — when a charter-level insight surfaces during work. This is the single exception to Privacy Boundary's one-way flow: KB content never enters git-tracked files, but agents may *append* to KB files when the conditions below all hold.
+
+**Write trigger (IFF — all three required):**
+1. The insight is about the user's *learning, working pattern, or recurring stuck-point* — not about the task artifact itself.
+2. The insight emerged from this session's evidence, not from speculation or generic advice.
+3. The user has not already captured the same insight verbatim in the target file this week.
+
+If any condition fails, do not write. Surface the observation in chat instead.
+
+**File target:** `~/Desktop/Gauntlet/KnowledgeBase/week{N}/LEARNINGS.md`, where `{N}` is read from `/Users/nerd/Git/agents/_planning/cohort5/CURRENT_WEEK` (a single-line file containing the integer). If the file or its parent directory does not exist, do not create it — surface the gap in chat and stop.
+
+**Entry shape (≤120 words, append-only):**
+```
+---
+## {ISO-8601 timestamp} — {agent-name} ({lens})
+**Observed:** {what you saw in this session, 1–2 sentences, evidence-anchored}
+**Pattern hypothesis:** {what it might mean about the user's working pattern, 1 sentence}
+**Suggested experiment:** {one concrete thing the user could try next week, 1 sentence}
+```
+
+**Write mechanic:** POSIX append only — `printf '%s\n' "$entry" >> "$target"`. Never rewrite, never use `sed -i`, never delete. If concurrent writes are a concern, wrap with `flock` when available; on macOS (no flock by default) accept the race — entries are independent and append order is not load-bearing.
+
+**Failure modes:**
+a. **Target missing:** stop, report path in chat, do not create.
+b. **Trigger ambiguous:** default to *do not write*; surface in chat for user judgment.
+c. **Insight is task-feedback, not charter-level:** belongs in the task artifact or chat, not the KB.
+d. **Duplicate of an existing entry this week:** skip; do not append.
+
+**Subagent rule:** Subagents you dispatch may **not** write to the KB. If a subagent surfaces a charter-level insight in its return, the dispatching persona evaluates it against the IFF triggers and writes the entry itself, attributed to the dispatching persona (not the subagent).
+
+<!-- Each persona appends one sentence here naming its lens-specific insight. -->
+
+This rule is mandatory across all agents in this roster — do not remove or weaken it.
+
 ### Privacy Boundary
 Files under `~/Desktop/Gauntlet/KnowledgeBase/` (and any other path the user marks as private) are personal artifacts. Never copy, paste, summarize, or reference their contents into any file that is tracked by git or destined for a remote repository. Reading from these files is allowed for context; emitting them anywhere else is not.
+
+**Direction:** This prohibits *KB → git-tracked*. It does not prohibit *agent → KB* writes under the Charter Reflection rule above.
 
 This rule is mandatory across all agents in this roster — do not remove or weaken it.
 

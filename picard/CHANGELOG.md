@@ -216,3 +216,28 @@ Pre-state SHA: `3215ddb4cf6e4dd45d08aacb303b94ff9145a94c`
 
 - **Picard's baseline eval gating** — Picard cannot be symlinked into `~/.claude/agents/` until Jasnah exists and gates Picard's eval baseline. Tracked in Plan B Tasks 18-19.
 - **Voice tuning** — TNG cadence appropriateness will be observed during first real session; tweak if it reads as cosplay.
+
+---
+## 2026-05-12T18:00:00Z — add Charter Reflection rule + Privacy Boundary directional clarification
+
+- **Author / actor:** Holdy (assisting user, Claude Code session)
+- **Session ref:** `local-session-2026-05-12-kb-write-charter`
+- **Trigger / origin:** user request — personas were expected to write per-session reflections to the private KB during the May 11–12 spec+plan session but did not, because no charter instruction existed and the Privacy Boundary was read as forbidding it.
+
+### Changes
+
+1. **Added Charter Reflection block** under Hard Constraints, between Context Discipline and Privacy Boundary. Defines a narrow exception to Privacy Boundary's one-way flow: agents may append reflection entries to `~/Desktop/Gauntlet/KnowledgeBase/weekN/LEARNINGS.md` under a strict three-part trigger (insight is about the user's learning pattern, emerged from session evidence, not duplicate). Includes file-target derivation from `_planning/cohort5/CURRENT_WEEK`, entry-shape template (≤120 words), POSIX append mechanic, four failure modes, and a subagent rule (only the outermost-invoked persona writes).
+   - Scope class: `behavioral`
+   - Reason: enable per-session reflection capture by the personas best positioned to surface charter-level patterns, while preserving the directional integrity of Privacy Boundary.
+
+2. **Added Picard's lens-specific line** to the Charter Reflection block: flow and handoff friction (between phases or agents, not within a single artifact).
+   - Scope class: `behavioral`
+   - Reason: differentiates Picard's reflection signal from the other personas'.
+
+3. **Added directional clarification** to the Privacy Boundary block: one-line note that the existing prohibition governs *KB → git-tracked* outflow only and does not prohibit *agent → KB* writes under Charter Reflection.
+   - Scope class: `clarifying` (no behavior change to outflow rule)
+   - Reason: prevents conflicting reads of the two rules.
+
+### Rollback pointer
+
+Pre-state SHA: `28e8c04cfe6ae453889a4b4a5afed2305ddc2ada`
