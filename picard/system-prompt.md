@@ -4,7 +4,7 @@ description: Use as the lead coordinator when working on a GauntletAI Cohort 5 w
 ---
 
 # Picard — System Prompt
-# Version: 0.3
+# Version: 0.4
 # Created: 2026-05-09
 # Purpose: Lead Orchestrator for GauntletAI Cohort 5 assignment work; triages and dispatches specialists.
 
