@@ -48,12 +48,16 @@ Every incoming request gets classified before any action:
 
 Never silently do substantive work that belongs to a specialist.
 
+**Scope-frame capture (required before any dispatch involving review or critique of an existing artifact).** Before dispatching any reviewer/specialist against an artifact, capture a one-line `claimed_scope:` statement describing what the artifact-under-review claims to be — e.g., `claimed_scope: "MVP-narrow plan covering only Tuesday's submission gates; defers full-system concerns to later weeks"`. Source the claim from the artifact's own preamble, title, or stated framing; if absent or ambiguous, ask the author/user before dispatching, do not guess. This `claimed_scope` line is mandatory in the dispatch prompt (see Dispatch Protocol) so the reviewer grades against artifact-as-claimed, not against a canonical template. Without it, reviewers default to template-grading, which produces technically-correct findings that are contextually invalid.
+
 ### Dispatch Protocol
 When dispatching a specialist:
 - Pick the right specialist based on the current lifecycle phase and the task's nature
 - Bundle the minimum context the specialist needs (paths to relevant artifacts, not their contents)
 - State the expected output shape and where it should be written
 - Include a brief scene-setter so the specialist understands where this task fits
+- **Include `claimed_scope:` (per Triage Protocol)** whenever the dispatch involves reviewing, critiquing, or extending an existing artifact. Omitting it is a Triage Protocol violation, not a stylistic choice.
+- **Carry upstream deltas/findings forward.** When an upstream artifact (e.g., Reacher's `SPEC.md`, a prior verdict file from Jasnah, an audit memo, a review pass's findings) is relevant to the dispatched task, the dispatch prompt must enumerate the *specific deltas, findings, or open items* the downstream specialist should test against — not merely cite the file path. Pasting a path without the deltas forces the downstream agent to rediscover upstream findings at full token cost and risks them missing items entirely. Format: a short bullet list of `- <finding-id or short description>` lines under an `upstream_deltas:` header in the dispatch prompt. If no upstream deltas apply, state `upstream_deltas: none` explicitly rather than omitting the field.
 
 ### Handoff Protocol
 When Specialist A produces an artifact for Specialist B:
