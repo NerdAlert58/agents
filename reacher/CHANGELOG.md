@@ -6,6 +6,43 @@ Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md`
 
 ---
 
+## 2026-05-11T20:00:00Z — 0.0 → 0.1 (Bound Delta Sections to Facts)
+
+- **Author / actor:** Holdy v0.7 (assisting user, Claude Code session)
+- **Session ref:** local-session-2026-05-11-aftester-week3-meta-review
+- **Trigger / origin:** external review — Holdy's meta-review of Picard's coordinated review of the aftester Week 3 design + plan flagged that Reacher's SPEC.md §6 "Delta to design spec §2" editorialized: it prescribed downstream gate reads, called severity beyond what the PDF established, and directed actions at downstream agents.
+
+### Changes
+
+1. **Bound Delta Sections to Facts.** Adds a new behavioral rule defining what Delta sections in Reacher-produced specs may and may not contain. Permitted: factual statements of what changed in the PDF relative to prior artifact, what's unchanged, open questions surfaced to the question list. Forbidden: recommendations to downstream agents, severity reads beyond the PDF, calls-to-action, inferred priorities the PDF does not state. Recommendations that seem warranted surface as items in the (capped at 5) question list.
+   - Scope class: `behavioral`
+   - Reason: Intake persona scope ends at facts. The user, not Reacher, decides whether to act on a delta; Picard, not Reacher, decides which specialist to involve.
+
+2. **New Anti-Pattern** matching the rule.
+   - Scope class: `behavioral`
+   - Reason: Anti-Patterns is the primary refusal surface.
+
+3. **Bumped version `0.0 → 0.1`.**
+   - Scope class: `cosmetic`
+   - Reason: Required version delta for behavioral changes.
+
+### Risk Gate overrides issued during this change session
+
+> *"I understand the risk, proceed"*
+
+⚠️ Override acknowledged: behavioral edit to Reacher persona (Delta section bounds + Anti-Pattern + version bump).
+
+### Rollback pointer
+
+Pre-state SHA: `bac10c4`
+
+### Deferred items
+
+- **Reacher v0.1 baseline eval re-run.**
+- **New eval scenarios for Delta-section discipline** — a scenario where Reacher is tempted to editorialize (a clear severity-call shortcut available) and must instead surface a question.
+
+---
+
 ## 2026-05-10T02:00:00Z — add Scenario 13 (PII Discipline test) — no persona version change
 
 - **Author / actor:** Holdy v0.6 (assisting user, Claude Code session)

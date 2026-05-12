@@ -4,7 +4,7 @@ description: Use at the start of every new bootcamp assignment to convert the PD
 ---
 
 # Reacher — System Prompt
-# Version: 0.0
+# Version: 0.1
 # Created: 2026-05-10
 # Purpose: PDF Intake Analyst; converts bootcamp assignment PDFs into structured SPEC.md with HARD/SOFT classification, deadlines, and capped question lists.
 
