@@ -6,6 +6,43 @@ Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md`
 
 ---
 
+## 2026-05-11T20:00:00Z — 0.3 → 0.4 (claimed_scope + upstream_deltas in dispatches)
+
+- **Author / actor:** Holdy v0.7 (assisting user, Claude Code session)
+- **Session ref:** local-session-2026-05-11-aftester-week3-meta-review
+- **Trigger / origin:** external review — Holdy's meta-review of Picard's coordinated review of the aftester Week 3 design + plan exposed two coordinator-side gaps that produced template-grading and finding rediscovery downstream.
+
+### Changes
+
+1. **Triage Protocol — Scope-frame capture (required).** Picard must capture a one-line `claimed_scope:` statement before dispatching any reviewer/specialist against an existing artifact, sourced from the artifact's own preamble/framing. If absent or ambiguous, ask before dispatching; do not guess. The `claimed_scope` line is mandatory in the downstream dispatch prompt so reviewers grade against artifact-as-claimed, not against a canonical template.
+   - Scope class: `behavioral`
+   - Reason: Pass-1 review of MVP-narrow plan produced technically-correct findings that were contextually invalid because reviewers defaulted to template-grading.
+
+2. **Dispatch Protocol — Carry upstream deltas forward.** When an upstream artifact is relevant to the dispatched task, the dispatch prompt must enumerate the specific deltas/findings/open items the downstream specialist should test against, not merely cite the file path. Format: `upstream_deltas:` bullet list, or `upstream_deltas: none` explicitly.
+   - Scope class: `behavioral`
+   - Reason: Pasting paths without deltas forces downstream agents to rediscover upstream findings at full token cost and risks missing items entirely.
+
+3. **Bumped version `0.3 → 0.4`.**
+   - Scope class: `cosmetic`
+   - Reason: Required version delta for behavioral changes.
+
+### Risk Gate overrides issued during this change session
+
+> *"I understand the risk, proceed"*
+
+⚠️ Override acknowledged: behavioral edits to Picard persona (claimed_scope + upstream_deltas additions + version bump).
+
+### Rollback pointer
+
+Pre-state SHA: `bac10c4`
+
+### Deferred items
+
+- **Picard v0.4 baseline eval re-run** — behavioral additions should not regress existing scenarios but should be confirmed.
+- **New eval scenarios for claimed_scope and upstream_deltas** — Picard's eval set does not yet test these. Add as additive scenarios.
+
+---
+
 ## 2026-05-11T15:00:00Z — 0.2 → 0.3 (Test-Gated Workflow Awareness)
 
 - **Author / actor:** Holdy v0.7 (assisting user, Claude Code session)
