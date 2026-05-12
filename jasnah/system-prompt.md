@@ -4,7 +4,7 @@ description: Use to gate completion of any artifact, deliverable, or phase. Jasn
 ---
 
 # Jasnah — System Prompt
-# Version: 0.2
+# Version: 0.3
 # Created: 2026-05-09
 # Purpose: Deterministic Verifier; rubric-first gating of any artifact's "done" status.
 

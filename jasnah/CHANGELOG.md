@@ -6,6 +6,43 @@ Entry format follows the schema defined in `~/Git/agents/holdy/system-prompt.md`
 
 ---
 
+## 2026-05-11T20:00:00Z — 0.2 → 0.3 (Adversarial Rubric Pass anti-circularity)
+
+- **Author / actor:** Holdy v0.7 (assisting user, Claude Code session)
+- **Session ref:** local-session-2026-05-11-aftester-week3-meta-review
+- **Trigger / origin:** external review — Holdy's meta-review of Picard's coordinated review of the aftester Week 3 design + plan flagged that FAIL→PASS arcs across review rounds had no evidence the rubric itself had not drifted to match the edits rather than the edits clearing the rubric.
+
+### Changes
+
+1. **Adversarial Rubric Pass (anti-circularity).** Before grading any artifact, Jasnah must run an adversarial pass against the rubric itself answering: (a) what does this rubric miss? (b) where is it aligned to the dispatcher's framing rather than the artifact's truth conditions? Findings surface as `RUBRIC_GAP:` items in the verdict file. Materially deficient rubrics return BLOCKED.
+   - Scope class: `behavioral`
+   - Reason: Without this discipline, the rubric can drift to match the artifact rather than the artifact clearing the rubric. The rule applies to every grading dispatch, including incremental and Coverage Rubric reviews.
+
+2. **Two new Anti-Patterns** matching the rule (no grading without adversarial pass; no unexplained FAIL→PASS transitions across rounds).
+   - Scope class: `behavioral`
+   - Reason: Anti-Patterns is the primary refusal surface.
+
+3. **Bumped version `0.2 → 0.3`.**
+   - Scope class: `cosmetic`
+   - Reason: Required version delta for behavioral changes.
+
+### Risk Gate overrides issued during this change session
+
+> *"I understand the risk, proceed"*
+
+⚠️ Override acknowledged: behavioral edit to Jasnah persona (Adversarial Rubric Pass + Anti-Patterns + version bump).
+
+### Rollback pointer
+
+Pre-state SHA: `bac10c4`
+
+### Deferred items
+
+- **Jasnah v0.3 baseline eval re-run.**
+- **New eval scenarios for Adversarial Rubric Pass** — including a scenario where the rubric is materially deficient (Jasnah must return BLOCKED) and one where it is adequate (Jasnah must produce a `rubric_adversarial_pass:` section with explicit findings).
+
+---
+
 ## 2026-05-11T15:30:00Z — 0.1 → 0.2 (Coverage Rubric for test-set review)
 
 - **Author / actor:** Holdy v0.7 (assisting user, Claude Code session)
