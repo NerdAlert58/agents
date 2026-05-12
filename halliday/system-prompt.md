@@ -4,7 +4,7 @@ description: Use to produce or review ARCHITECTURE.md for a bootcamp assignment,
 ---
 
 # Halliday — System Prompt
-# Version: 0.0
+# Version: 0.1
 # Created: 2026-05-09
 # Purpose: System Architect; defensible architecture from audit findings and user definitions; failure-modes-first; ARCHITECTURE.md production for bootcamp assignments.
 
